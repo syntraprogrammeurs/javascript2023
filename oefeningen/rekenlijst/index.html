@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Rekenlijst</title>
+</head>
+<body>
+<!--In de eerste div staan alle dropdownlijsten.  Hier vragen we
+het typeberekening, aantaldigits en aantalberekeningen op.-->
+<div>
+    <p>Soort oefeningen:</p>
+    <select id="typeBerekening">
+        <option value="1">Optelling, 2 operands</option>
+        <option value="2">Aftrekking, 2 operands</option>
+        <option value="3">Vermenigvuldiging, 2 operands</option>
+        <option value="4">Deling, 2 operands</option>
+        <option value="5">Mix, 2 operands</option>
+    </select>
+    <p>Aantal digits:</p>
+    <select id="aantalDigits" name="">
+        <option value="1">1 digit</option>
+        <option value="2">2 digits</option>
+        <option value="3">3 digits</option>
+        <option value="4">4 digits</option>
+        <option value="5">5 digits</option>
+        <option value="6">6 digits</option>
+    </select>
+    <p>Aantal oefeningen:</p>
+    <input type="number" id="aantalBerekeningen">
+    <!--  <select id="aantalBerekeningen" name="">
+          <option value="5">5 oefeningen</option>
+          <option value="10">10 oefeningen</option>
+          <option value="15">15 oefeningen</option>
+          <option value="20">20 oefeningen</option>
+      </select>-->
+    <input onclick="generateOefeningen();" type="button" value="Genereer oefeningen">
+    <input onclick="window.print();" type="button" value="Print Pagina">
+</div>
+
+<div id="title">
+</div>
+<div id="worksheet">
+</div>
+
+
+<script>
+    /* Deze functie zorgt ervoor dat we de value uit de geselecteerde option
+     per select (dropdownlijst) ophalen.*/
+    function getDropDownListValue(name) {
+        var list = document.getElementById(name);
+        return list.options[list.selectedIndex].value;
+    }
+
+    /*deze functie genereert de oefeningen en injecteert deze in de div van worksheet*/
+    function generateOefeningen() {
+        //ophalen van de aangeklikte values per dropdownlijst
+        var typeBerekening = getDropDownListValue("typeBerekening");
+        //var aantalBerekeningen = getDropDownListValue("aantalBerekeningen");
+        var aantalBerekeningen = document.getElementById("aantalBerekeningen").value;
+        var aantalDigits = getDropDownListValue("aantalDigits");
+
+        var operand1, operand2, operator, operators;
+
+        var resultaat = "<div>";
+        //keuze van berekening
+        switch (typeBerekening) {
+            case '1':
+                operators = ['+'];
+                document.getElementById('title').innerHTML = 'Optellingen';
+                allesBehalveDeling();
+                break;
+            case '2':
+                operators = ['-'];
+                document.getElementById('title').innerHTML = 'Aftrekking';
+                allesBehalveDeling();
+                break;
+            case '3':
+                operators = ['*'];
+                document.getElementById('title').innerHTML = 'Vermenigvuldiging';
+                allesBehalveDeling();
+                break;
+            case '4':
+                operators = ['/'];
+                document.getElementById('title').innerHTML = 'Deling';
+                allesMetDeling()
+                break;
+            case '5':
+                operators = ['+', '-', '*', '/'];
+                document.getElementById('title').innerHTML = 'Mix';
+                allesMetDeling()
+                break;
+        }
+        document.getElementById("worksheet").innerHTML = "";
+
+        /**genereren van de oefeningen**/
+        function allesBehalveDeling() {
+
+            teller = 0;
+            for (i = 1; i <= parseInt(aantalBerekeningen); i++) {
+                operand1 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                operand2 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                operator = operators[Math.floor(Math.random() * operators.length)]
+                berekening = String(operand1) + ' ' + operator + ' ' + String(operand2) + ' = ';
+                if(teller < 10){
+                    resultaat += berekening + '<br>';
+                    teller++
+                }
+
+                teller=0;
+            }
+
+            return resultaat;
+        }
+
+        document.getElementById('worksheet').innerHTML = resultaat;
+
+        /**testen oefeningen met deling inbegrepen**/
+        function allesMetDeling(){
+            for (i = 1; i <= parseInt(aantalBerekeningen); i++) {
+                operand1 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                operand2 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                operator = operators[Math.floor(Math.random() * operators.length)]
+                while((operand1 < operand2 || operand1%operand2 != 0) && (operator == '/')){
+                    operand1 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                    operand2 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
+                }
+                berekening = String(operand1) + ' ' + operator + ' ' + String(operand2) + ' = ';
+                resultaat += berekening + '<br>';
+                resultaat+="";
+
+            }
+            return resultaat;
+        }
+    }
+</script>
+</body>
+</html>
