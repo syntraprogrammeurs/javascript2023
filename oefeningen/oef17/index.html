@@ -11,10 +11,14 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
-            <h1 class="text-center mb-4">Controleer alle getalen op armstrong van 1 tot het eindgetal</h1>
+            <h1 class="text-center mb-4">Geldig rekeningnummer</h1>
             <form class="mb-4 d-flex justify-content-center">
-                <input type="number" class="form-control" id="eenGetal" placeholder="Geef een eindgetal in">
-                <button type="button" class="btn btn-primary" onclick="controleerArmstrong()">Armstrong?</button>
+                <!--pattern is een mask of een patroon die zorgt voor de juiste opbouw/weergave van het rekeningnummer in een inputveld.
+                \d: Dit staat voor een cijfer (0-9).
+                {n}: Dit geeft aan dat het vorige element exact 'n' keer moet voorkomen. In dit geval, \d{3} betekent dat er precies drie opeenvolgende cijfers moeten zijn.
+                -: Dit staat letterlijk voor een koppelteken.-->
+                <input type="text" class="form-control" id="rekeningnummer" pattern="\d{3}-\d{7}-\d{2}" placeholder="000-0000000-00">
+                <button type="button" class="btn btn-primary" onclick="controleerRekeningnummer()">Controleer?</button>
             </form>
             <p id="resultaat" class="border border-1 border-white bg-warning rounded-pill text-white text-center p-5"></p>
         </div>

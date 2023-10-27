@@ -1,43 +1,32 @@
-// Functie die controleert of een getal een Armstrong-nummer is
-function controleerArmstrong() {
-    // Haal het eindgetal uit het invoerveld
-    var eindgetal = parseInt(document.getElementById('eenGetal').value, 10);
-
-    // Vind het resultaat element
-    var resultaatElement = document.getElementById('resultaat');
-
-    // Array om Armstrong-getallen op te slaan
-    var armstrongGetallen = [];
-
-    // Loop door alle getallen van 1 tot het opgegeven eindgetal
-    for (var i = 0; i <= eindgetal; i++) {
-        // Converteer het getal naar een string om de lengte te krijgen
-        var numStr = String(i);
-        var lengte = numStr.length;
-
-        // Initialiseer de som van de machten van de cijfers op nul
-        var somMachten = 0;
-
-        // Loop door elk cijfer in het getal
-        for (var j = 0; j < lengte; j++) {
-            // Converteer het cijfer terug naar een getal en bereken de macht
-            var cijfer = parseInt(numStr[j], 10);
-            var macht = Math.pow(cijfer, lengte);
-
-            // Voeg de macht toe aan de som
-            somMachten += macht;
-        }
-
-        // Controleer of de som van machten gelijk is aan het oorspronkelijke getal
-        if (somMachten === i) {
-            armstrongGetallen.push(i);
-        }
-    }
-
-    // Update de tekst van het resultaat element
-    if (armstrongGetallen.length > 0) {
-        resultaatElement.textContent = 'Armstrong getallen: ' + armstrongGetallen.join(', ');
+// Deze functie controleert of het ingevoerde rekeningnummer geldig is.
+function controleerRekeningnummer() {
+    // Haal de waarde van het inputveld met id 'rekeningnummer' op.
+    const rekeningnummerInput = document.getElementById('rekeningnummer').value;
+    // Verwijder eventuele koppeltekens, split de string in afzonderlijke cijfers en zet ze in een array.
+    const rekeningnummerArray = rekeningnummerInput.split('-').join('').split('');
+    // Haal het controlegetal (laatste twee cijfers) uit de array en converteer het naar een getal.
+    const controleGetal = parseInt(rekeningnummerArray.slice(-2).join(''));
+    // Haal de eerste tien cijfers uit de array en converteer ze naar een getal.
+    const eersteTienCijfers = parseInt(rekeningnummerArray.slice(0, -2).join(''));
+    // Controleer of het rekeningnummer geldig is volgens de opgegeven regel.
+    if (eersteTienCijfers % 97 === controleGetal) {
+        document.getElementById('resultaat').textContent = 'Geldig';
     } else {
-        resultaatElement.textContent = 'Geen Armstrong getallen gevonden';
+        document.getElementById('resultaat').textContent = 'Niet geldig';
     }
 }
+
+// Voeg een event listener toe aan het inputveld met id 'rekeningnummer'.
+document.getElementById('rekeningnummer').addEventListener('input', function() {
+    // Haal de ingevoerde waarde op.
+    const inputValue = this.value;
+    // Verwijder alle niet-cijfers uit de ingevoerde waarde.
+    //\D: Dit is een speciale regex-metafoor die overeenkomt met elk karakter dat geen cijfer is. Met andere woorden, het staat voor "niet-cijfer".
+    // g: Dit is een vlag die aangeeft dat de zoekopdracht globaal moet worden uitgevoerd. Dit betekent dat het alle overeenkomsten in de hele string zal vinden in plaats van alleen de eerste.
+    // Dus, /\D/g zoekt naar alle niet-cijfers in de string.
+    const formattedValue = inputValue.replace(/\D/g, '');
+    // Formatteer de waarde in het gewenste formaat met koppeltekens.
+    const formattedOutput = formattedValue.slice(0, 3) + '-' + formattedValue.slice(3, 10) + '-' + formattedValue.slice(10, 12);
+    // Zet de geformatteerde waarde terug in het inputveld.
+    this.value = formattedOutput;
+});
