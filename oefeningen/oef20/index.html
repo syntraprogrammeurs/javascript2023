@@ -11,16 +11,14 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
-            <h1 class="text-center mb-4">Dubbele waarden</h1>
+            <h1 class="text-center mb-4">Morse</h1>
             <form class="mb-4 d-flex flex-column justify-content-center">
                 <div class="d-flex mb-2 justify-content-center">
-                    <input class="form-control" type="number" id="hoeveelGetallen" placeholder="hoeveel getallen in de array?">
-                 <button type="button" class="btn btn-primary me-1" onclick="genereerArray()">Genereer een array</button>
-                    <button type="button" class="btn btn-success" onclick="toonDubbele()">Toon dubbele waarden</button>
+                    <input class="form-control" type="text" id="eenString" placeholder="geef een string in">
+                 <button type="button" class="btn btn-primary me-1" onclick="tekstNaarMorseCode()">Morse</button>
                 </div>
             </form>
-            <p id="generateArrayResult" class="border border-1 border-white bg-warning rounded-pill text-white text-center p-5"></p>
-            <p id="showDouble" class="border border-1 border-white bg-dark rounded-pill text-white text-center p-5"></p>
+            <p id="resultaat" class="border border-1 border-white bg-warning rounded-pill text-white text-center p-5"></p>
         </div>
     </div>
 </div>
