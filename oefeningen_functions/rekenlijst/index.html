@@ -31,10 +31,10 @@ het typeberekening, aantaldigits en aantalberekeningen op.-->
     <p>Aantal oefeningen:</p>
     <input type="number" id="aantalBerekeningen">
     <!--  <select id="aantalBerekeningen" name="">
-          <option value="5">5 oefeningen</option>
-          <option value="10">10 oefeningen</option>
-          <option value="15">15 oefeningen</option>
-          <option value="20">20 oefeningen</option>
+          <option value="5">5 oefeningen_functions</option>
+          <option value="10">10 oefeningen_functions</option>
+          <option value="15">15 oefeningen_functions</option>
+          <option value="20">20 oefeningen_functions</option>
       </select>-->
     <input onclick="generateOefeningen();" type="button" value="Genereer oefeningen">
     <input onclick="window.print();" type="button" value="Print Pagina">
@@ -54,7 +54,7 @@ het typeberekening, aantaldigits en aantalberekeningen op.-->
         return list.options[list.selectedIndex].value;
     }
 
-    /*deze functie genereert de oefeningen en injecteert deze in de div van worksheet*/
+    /*deze functie genereert de oefeningen_functions en injecteert deze in de div van worksheet*/
     function generateOefeningen() {
         //ophalen van de aangeklikte values per dropdownlijst
         var typeBerekening = getDropDownListValue("typeBerekening");
@@ -95,7 +95,7 @@ het typeberekening, aantaldigits en aantalberekeningen op.-->
         }
         document.getElementById("worksheet").innerHTML = "";
 
-        /**genereren van de oefeningen**/
+        /**genereren van de oefeningen_functions**/
         function allesBehalveDeling() {
 
             teller = 0;
@@ -117,7 +117,7 @@ het typeberekening, aantaldigits en aantalberekeningen op.-->
 
         document.getElementById('worksheet').innerHTML = resultaat;
 
-        /**testen oefeningen met deling inbegrepen**/
+        /**testen oefeningen_functions met deling inbegrepen**/
         function allesMetDeling(){
             for (i = 1; i <= parseInt(aantalBerekeningen); i++) {
                 operand1 = Math.floor((Math.random() * (Math.pow(10, aantalDigits) + 1)));
