@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Klik op de knop om je huidige locatie te krijgen:</p>
+<button onclick="getLocation()">Vind mijn locatie</button>
+
+<p id="location">Locatiegegevens verschijnen hier...</p>
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            document.getElementById("location").innerHTML = "Geolocation wordt niet ondersteund door deze browser.";
+        }
+    }
+
+    function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        document.getElementById("location").innerHTML = "Breedtegraad: " + latitude +
+            "<br>Lengtegraad: " + longitude;
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById("location").innerHTML = "Gebruiker heeft de aanvraag voor Geolocation geweigerd."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById("location").innerHTML = "Locatie-informatie is niet beschikbaar."
+                break;
+            case error.TIMEOUT:
+                document.getElementById("location").innerHTML = "Het verzoek om de gebruikerslocatie is verlopen."
+                break;
+            case error.UNKNOWN_ERROR:
+                document.getElementById("location").innerHTML = "Er is een onbekende fout opgetreden."
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
