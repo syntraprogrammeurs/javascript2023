@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Storage API Voorbeeld</title>
+</head>
+<body>
+
+<h1>Web Storage API Voorbeeld</h1>
+
+<button onclick="saveToLocalStorage()">Opslaan in Local Storage</button>
+<button onclick="saveToSessionStorage()">Opslaan in Session Storage</button>
+<button onclick="clearStorage()">Opslag Legen</button>
+
+<p id="local-storage-status"></p>
+<p id="session-storage-status"></p>
+
+<script>
+    // Functie om een waarde op te slaan in local storage
+    function saveToLocalStorage() {
+        localStorage.setItem('greeting', 'Hallo, dit is opgeslagen in Local Storage!');
+        document.getElementById('local-storage-status').textContent = 'Opgeslagen in Local Storage: ' + localStorage.getItem('greeting');
+    }
+
+    // Functie om een waarde op te slaan in session storage
+    function saveToSessionStorage() {
+        sessionStorage.setItem('farewell', 'Tot ziens, dit is opgeslagen in Session Storage!');
+        document.getElementById('session-storage-status').textContent = 'Opgeslagen in Session Storage: ' + sessionStorage.getItem('farewell');
+    }
+
+    // Functie om zowel local als session storage te legen
+    function clearStorage() {
+        localStorage.removeItem('greeting');
+        sessionStorage.removeItem('farewell');
+        document.getElementById('local-storage-status').textContent = 'Local Storage geleegd.';
+        document.getElementById('session-storage-status').textContent = 'Session Storage geleegd.';
+    }
+
+    // Laad opgeslagen waarden wanneer de pagina laadt
+    document.getElementById('local-storage-status').textContent = localStorage.getItem('greeting') ? 'Local Storage: ' + localStorage.getItem('greeting') : 'Local Storage is leeg';
+    document.getElementById('session-storage-status').textContent = sessionStorage.getItem('farewell') ? 'Session Storage: ' + sessionStorage.getItem('farewell') : 'Session Storage is leeg';
+</script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // <!--Callback en promises-->
+    // <!--Bij het werken met asynchrone code, maakt de JavaScript-runtime gebruik van callbacks en promises om te bepalen welke code moet worden uitgevoerd nadat een bepaalde taak is voltooid.-->
+    //
+    //     <!--callback-->
+
+    callback = [1,2,3]
+        function fetchData(callback){
+            setTimeout(function(){
+                callback("Data opgehaald");
+            },2000);
+
+                }
+        function processResult(){
+            console.log(result);
+        }
+        fetchData(processResult());
+
+
+    //tweede promise
+
+    function fetchData() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve("Data opgehaald!");
+            }, 2000);
+        });
+    }
+    fetchData()
+        .then(function(result) {
+            console.log(result);
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
+
+
+</script>
+</body>
+</html>
+
+
